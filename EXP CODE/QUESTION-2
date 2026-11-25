@@ -1,0 +1,65 @@
+
+graph = {
+    'A': ['B', 'C', 'D'],
+    'B': ['E', 'F'],
+    'C': ['G', 'H'],
+    'D': ['I'],
+    'E': [],
+    'F': [],
+    'G': [],
+    'H': [],
+    'I': []
+}
+
+heuristic = {
+    'A': 8,
+    'B': 6,
+    'C': 4,
+    'D': 7,
+    'E': 5,
+    'F': 2,
+    'G': 3,
+    'H': 1,
+    'I': 6
+}
+
+
+def beam_search(start, goal, beam_width):
+    beam = [[start]]
+
+    while beam:
+        candidates = []
+
+        for path in beam:
+            node = path[-1]
+
+            if node == goal:
+                return path
+
+            for neighbor in graph[node]:
+                new_path = path + [neighbor]
+                candidates.append(new_path)
+
+        candidates.sort(
+            key=lambda path: heuristic[path[-1]]
+        )
+
+        beam = candidates[:beam_width]
+
+    return None
+
+
+start = 'A'
+goal = 'H'
+beam_width = 2
+
+result = beam_search(start, goal, beam_width)
+
+print("Start Node:", start)
+print("Goal Node:", goal)
+print("Beam Width:", beam_width)
+
+if result:
+    print("Best Path:", " -> ".join(result))
+else:
+    print("Goal not found")
