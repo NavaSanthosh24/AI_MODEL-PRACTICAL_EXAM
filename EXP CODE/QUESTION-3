@@ -1,0 +1,36 @@
+
+% Student Facts
+student(101, arun).
+student(102, bala).
+student(103, charan).
+student(104, david).
+
+% Course Facts
+course(c101, python).
+course(c102, java).
+course(c103, ai).
+
+% Faculty Facts
+faculty(f1, ravi).
+faculty(f2, kumar).
+faculty(f3, priya).
+
+% Enrollment Facts
+enrollment(101, c101).
+enrollment(102, c101).
+enrollment(103, c102).
+enrollment(104, c103).
+enrollment(101, c103).
+
+% Rule to find students enrolled in a course
+enrolled_students(Course, Student) :-
+    enrollment(ID, Course),
+    student(ID, Student).
+
+% Rule to display course details
+course_details(Course, Name) :-
+    course(Course, Name).
+
+% Rule to find faculty details
+faculty_details(ID, Name) :-
+    faculty(ID, Name).
