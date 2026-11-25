@@ -1,0 +1,15 @@
+
+% Knowledge Base
+
+human(socrates).
+
+% All humans are mortal
+mortal(X) :- human(X).
+
+% Resolution Refutation
+prove_mortal(X) :-
+    human(X),
+    mortal(X).
+
+% Query
+% ?- prove_mortal(socrates).
